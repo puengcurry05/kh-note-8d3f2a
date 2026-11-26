@@ -1,0 +1,18 @@
+{
+  "name": "한국사 빈칸 학습",
+  "short_name": "한국사",
+  "description": "신동필T · 송치중T 한국사 빈칸 타자 확인 학습",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f5f1",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

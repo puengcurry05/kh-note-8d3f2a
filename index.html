@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#ffffff" id="meta-theme-color">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="한국사">
+  <title>한국사 시험 대비 — 신동필T · 송치중T</title>
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- Landing: Teacher Selection Screen -->
+  <section id="landing-screen" class="landing-wrap">
+    <div class="landing-top">
+      <div class="doc-title-group">
+        <h1 class="landing-title">한국사 시험 대비</h1>
+        <span class="site-subtitle">빈칸 타자 확인 학습</span>
+      </div>
+      <button type="button" id="landing-theme-toggle" class="quiet-btn" aria-label="화면 테마 전환">어두운 화면</button>
+    </div>
+
+    <p class="landing-lead">학습할 선생님 파트를 선택하세요.</p>
+
+    <div class="teacher-grid" id="teacher-cards">
+      <button type="button" class="teacher-card" data-select-teacher="shin">
+        <div class="teacher-card-head">
+          <span class="teacher-name">신동필T</span>
+          <span class="teacher-source-tag">수업 자료 프린트</span>
+        </div>
+        <p class="teacher-scope">주제 06 – 10 · 일제 강점기 민족 운동과 전시 수탈</p>
+        <div class="teacher-card-foot">
+          <span class="teacher-detail">본문 원문 · 시대순 연표 · 단원 마무리 34문항</span>
+          <span class="teacher-progress" id="landing-progress-shin"></span>
+        </div>
+      </button>
+
+      <button type="button" class="teacher-card" data-select-teacher="song">
+        <div class="teacher-card-head">
+          <span class="teacher-name">송치중T</span>
+          <span class="teacher-source-tag">교과서 88~107쪽</span>
+        </div>
+        <p class="teacher-scope">주제 18 – 22 · 4·19 혁명에서 6월 민주 항쟁까지</p>
+        <div class="teacher-card-foot">
+          <span class="teacher-detail">교과서 본문 · 사료·용어·역사 읽기 · 시대순 연표</span>
+          <span class="teacher-progress" id="landing-progress-song"></span>
+        </div>
+      </button>
+    </div>
+
+    <p class="landing-hint">키보드 <code>1</code> 신동필T · <code>2</code> 송치중T</p>
+  </section>
+
+  <!-- Study Workspace Screen -->
+  <div id="workspace-screen" hidden>
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="title-row">
+          <div class="doc-title-group">
+            <button type="button" id="btn-back-landing" class="back-btn" title="선생님 선택 화면으로 이동">← 파트 선택</button>
+            <h1 class="site-title" id="workspace-title">신동필T 한국사</h1>
+            <span class="site-subtitle" id="workspace-subtitle">시험 범위 주제 06–10</span>
+          </div>
+          <div class="header-meta">
+            <div class="segmented teacher-switch" id="header-teacher-switch" role="group" aria-label="선생님 파트 전환">
+              <button type="button" class="seg-btn" data-switch-teacher="shin">신동필T</button>
+              <button type="button" class="seg-btn" data-switch-teacher="song">송치중T</button>
+            </div>
+            <button type="button" id="theme-toggle" class="quiet-btn" aria-label="화면 테마 전환">어두운 화면</button>
+          </div>
+        </div>
+
+        <nav class="topic-tabs" id="topic-tabs" aria-label="주제 선택"></nav>
+      </div>
+    </header>
+
+    <div class="toolbar-bar">
+      <div class="toolbar-inner">
+        <div class="toolbar-left">
+          <div class="segmented" id="density-control" role="group" aria-label="빈칸 비율">
+            <button type="button" data-density="standard" class="seg-btn is-active">핵심 기본</button>
+            <button type="button" data-density="dense" class="seg-btn">촘촘히</button>
+            <button type="button" data-density="all" class="seg-btn">전체 키워드</button>
+            <button type="button" data-density="read" class="seg-btn">원문 읽기</button>
+          </div>
+        </div>
+
+        <div class="toolbar-right">
+          <span class="score-status" id="score-status" aria-live="polite"></span>
+          <button type="button" id="btn-check-all" class="action-btn">채점</button>
+          <button type="button" id="btn-peek-all" class="action-btn" aria-pressed="false">정답 표시</button>
+          <button type="button" id="btn-clear-inputs" class="action-btn" title="현재 뚫린 위치는 유지하고 입력한 답만 지웁니다">다시 쓰기</button>
+          <button type="button" id="btn-reroll" class="action-btn action-btn-primary" title="이전 판과 다른 핵심 키워드 위치에 빈칸을 새로 뚫습니다 (Option+R)">새 빈칸 리셋</button>
+        </div>
+      </div>
+    </div>
+
+    <main class="page-main">
+      <form id="study-form" class="sheet" autocomplete="off" spellcheck="false" novalidate>
+        <div id="sheet-content"></div>
+        <button type="submit" class="sr-only" tabindex="-1">채점하기</button>
+      </form>
+
+      <footer class="sheet-footer">
+        <span><code>Enter</code> 채점 후 다음 빈칸 이동</span>
+        <span class="sep">·</span>
+        <span><code>Tab</code> 빈칸 이동</span>
+        <span class="sep">·</span>
+        <span><code>Option + /</code> 현재 빈칸 정답 확인</span>
+        <span class="sep">·</span>
+        <span><code>Option + R</code> 다른 키워드로 새 빈칸 리셋</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./data.js"></script>
+  <script src="./data-song.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
